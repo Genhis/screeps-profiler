@@ -149,7 +149,7 @@ const Profiler = {
 
     const elapsedTicks = (Memory.profiler.type === 'background' ? Game.time :
       Math.min(Memory.profiler.disableTick, Game.time)) - Memory.profiler.enabledTick + 1;
-    const header = 'calls\t\ttime\t\tavg\t\tfunction';
+    const header = 'Ticks\tCalls\tTime\tAverage\tFunction';
     const footer = [
       `Avg: ${(Memory.profiler.totalTime / elapsedTicks).toFixed(2)}`,
       `Total: ${Memory.profiler.totalTime.toFixed(2)}`,
@@ -173,11 +173,12 @@ const Profiler = {
 
     const lines = stats.map(data => {
       return [
+        null,
         data.calls,
-        data.totalTime.toFixed(1),
-        data.averageTime.toFixed(3),
+        data.totalTime.toFixed(2),
+        data.averageTime.toFixed(4),
         data.name,
-      ].join('\t\t');
+      ].join('\t');
     });
 
     return lines;
