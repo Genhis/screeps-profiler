@@ -147,7 +147,8 @@ const Profiler = {
       return 'Profiler not active.';
     }
 
-    const elapsedTicks = Game.time - Memory.profiler.enabledTick + 1;
+    const elapsedTicks = (Memory.profiler.type === 'background' ? Game.time :
+      Math.min(Memory.profiler.disableTick, Game.time)) - Memory.profiler.enabledTick + 1;
     const header = 'calls\t\ttime\t\tavg\t\tfunction';
     const footer = [
       `Avg: ${(Memory.profiler.totalTime / elapsedTicks).toFixed(2)}`,
